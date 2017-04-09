@@ -1,0 +1,34 @@
+system {
+    host-name {{ inventory_hostname  }};
+    services {
+        ssh {
+            root-login allow;
+        
+        }
+        netconf {
+            ssh;
+        
+        }
+    
+    }
+
+}
+    interfaces {
+    {% for i in host.interfaces %}
+        {{ i.interface  }} {
+            unit 0 {
+                description "{{ i.description  }}";
+                family inet {
+                    address {{ i.local_ip  }};
+                
+                }
+                
+            }
+        }
+    {% endfor %}
+}
+protocols {
+    lldp {
+        interface all;
+    }
+}

@@ -1,0 +1,19 @@
+host_name: PE2
+host:
+  interfaces:
+    - interface: lo0
+      description: peering loopback
+      local_ip: 171.16.0.22/32
+    - interface: ge-0/0/1
+      description: to CE2
+      local_ip: 10.1.0.3/31
+    - interface: ge-0/0/2
+      description: to CE1
+      local_ip: 10.1.0.5/31
+    - interface: ge-0/0/3
+      description: to PE1
+      local_ip: 10.1.100.1/31
+    - interface: ge-0/0/4
+      description: to P2
+      local_ip: 10.1.10.4/31 
+
