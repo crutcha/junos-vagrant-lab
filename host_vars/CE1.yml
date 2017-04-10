@@ -1,9 +1,9 @@
 host_name: CE1
 host:
+  loopback:
+    local_ip: 192.168.10.1/32
+    iso_net: 49.0000.0000.cccc.0001.00
   interfaces:
-    - interface: lo0
-      description: peering loopback
-      local_ip: 192.168.10.1/32
     - interface: ge-0/0/1
       description: to H1
       local_ip: 10.1.12.1/24

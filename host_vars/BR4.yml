@@ -1,0 +1,12 @@
+host_name: BR4
+host:
+  loopback:
+    local_ip: 192.168.20.4/32
+    iso_net: 49.0000.0000.cccc.0012.00
+  interfaces:
+    - interface: ge-0/0/1
+      description: to PE4
+      local_ip: 10.2.0.4/24
+    - interface: ge-0/0/2
+      description: to H3
+      local_ip: 10.2.34.4/31

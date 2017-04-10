@@ -1,0 +1,16 @@
+host_name: PE4
+host:
+  loopback:
+    local_ip: 171.16.0.44/32
+    iso_net: 49.0000.0000.cccc.0010.00
+  interfaces:
+    - interface: ge-0/0/1
+      description: to P2
+      local_ip: 10.1.10.11/31
+    - interface: ge-0/0/2
+      description: to PE3
+      local_ip: 10.1.100.13/31
+    - interface: ge-0/0/3
+      description: to BR3-4
+      local_ip: 10.2.0.44/24
+

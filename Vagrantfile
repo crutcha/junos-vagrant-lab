@@ -97,7 +97,6 @@ Vagrant.configure("2") do |config|
     end
   end
 
-
   config.vm.define "P1" do |p1|
     p1.vm.box = "juniper/ffp-12.1X47-D15.4-packetmode"
     p1.vm.host_name = "P1"
@@ -108,6 +107,10 @@ Vagrant.configure("2") do |config|
     p1.vm.network "private_network", virtualbox__intnet: "P1-P2-2"
     p1.vm.network "private_network", virtualbox__intnet: "P1-RR2"
     p1.vm.network "private_network", virtualbox__intnet: "P1-PE3"
+    p1.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end
 
   config.vm.define "P2" do |p2|
@@ -120,6 +123,10 @@ Vagrant.configure("2") do |config|
     p2.vm.network "private_network", virtualbox__intnet: "P1-P2-2"
     p2.vm.network "private_network", virtualbox__intnet: "P2-RR2"
     p2.vm.network "private_network", virtualbox__intnet: "P2-PE4"
+    p2.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end  
 
   config.vm.define "RR1" do |rr1|
@@ -129,6 +136,10 @@ Vagrant.configure("2") do |config|
     rr1.vm.network "private_network", virtualbox__intnet: "RR1-P1"
     rr1.vm.network "private_network", virtualbox__intnet: "RR1-RR2"
     rr1.vm.network "private_network", virtualbox__intnet: "RR1-P2"
+    rr1.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end 
  
   config.vm.define "RR2" do |rr2|
@@ -138,7 +149,10 @@ Vagrant.configure("2") do |config|
     rr2.vm.network "private_network", virtualbox__intnet: "P1-RR2"
     rr2.vm.network "private_network", virtualbox__intnet: "RR1-RR2"
     rr2.vm.network "private_network", virtualbox__intnet: "P2-RR2"
-    rr2.vm.network "private_network", virtualbox__intnet: "management"
+    rr2.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end
 
   config.vm.define "PE3" do |pe3|
@@ -148,7 +162,10 @@ Vagrant.configure("2") do |config|
     pe3.vm.network "private_network", virtualbox__intnet: "P1-PE3"
     pe3.vm.network "private_network", virtualbox__intnet: "PE3-PE4"
     pe3.vm.network "private_network", virtualbox__intnet: "PE3-BR3"
-    pe3.vm.network "private_network", virtualbox__intnet: "management"
+    pe3.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end
  
   config.vm.define "PE4" do |pe4|
@@ -158,7 +175,10 @@ Vagrant.configure("2") do |config|
     pe4.vm.network "private_network", virtualbox__intnet: "P2-PE4"
     pe4.vm.network "private_network", virtualbox__intnet: "PE3-PE4"
     pe4.vm.network "private_network", virtualbox__intnet: "PE4-BR4"
-    pe4.vm.network "private_network", virtualbox__intnet: "management"
+    pe4.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end 
  
   config.vm.define "BR3" do |br3|
@@ -167,7 +187,10 @@ Vagrant.configure("2") do |config|
     br3.vm.network "forwarded_port", guest: 22, host: 2011, id: "ssh"
     br3.vm.network "private_network", virtualbox__intnet: "PE3-BR3"
     br3.vm.network "private_network", virtualbox__intnet: "BR-H3"
-    br3.vm.network "private_network", virtualbox__intnet: "management"
+    br3.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end
  
   config.vm.define "BR4" do |br4|
@@ -176,22 +199,16 @@ Vagrant.configure("2") do |config|
     br4.vm.network "forwarded_port", guest: 22, host: 2012, id: "ssh"
     br4.vm.network "private_network", virtualbox__intnet: "PE4-BR4"
     br4.vm.network "private_network", virtualbox__intnet: "BR-H3"
-    br4.vm.network "private_network", virtualbox__intnet: "management"
+    br4.vm.provision "ansible" do |ansible|
+      ansible.playbook = "baseconfig.yml"
+      ansible.host_key_checking = false
+    end
   end 
   
   config.vm.define "H3" do |h3|
     h3.vm.box = "ubuntu/xenial64"
     h3.vm.network "private_network", virtualbox__intnet: "BR-H3",
             ip: "10.2.34.30/24", auto_config: true
-  end
-
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.groups = {
-                "CE" => ["CE1", "CE2"],
-                "PE" => ["PE1", "PE2"],
-    }
-    ansible.playbook = "baseconfig.yml" 
   end
 
 

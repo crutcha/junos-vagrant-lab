@@ -14,6 +14,17 @@ system {
 
 }
     interfaces {
+        lo0 {
+            unit 0 {
+                description "peering loopback";
+                family inet {
+                    address {{ host.loopback.local_ip }}
+                }
+                family iso  {
+                    address {{ host.loopback.iso_net }}
+                }
+            }
+        }
     {% for i in host.interfaces %}
         {{ i.interface  }} {
             unit 0 {
@@ -30,5 +41,11 @@ system {
 protocols {
     lldp {
         interface all;
+    }
+    isis {
+        interface lo0.0;
+        {% for i in host.interfaces %}
+        interface {{ i.interface }};
+        {% endfor %}
     }
 }

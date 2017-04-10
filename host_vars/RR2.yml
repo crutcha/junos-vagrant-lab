@@ -1,0 +1,16 @@
+host_name: RR2
+host:
+  loopback:
+    local_ip: 171.16.0.202/32
+    iso_net: 49.0000.0000.cccc.0008.00
+  interfaces:
+    - interface: ge-0/0/1
+      description: to P1
+      local_ip: 10.1.10.21/31
+    - interface: ge-0/0/2
+      description: to RR1
+      local_ip: 10.1.10.15/31
+    - interface: ge-0/0/3
+      description: to P2
+      local_ip: 10.1.10.23/31
+

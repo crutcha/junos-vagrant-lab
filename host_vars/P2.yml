@@ -1,0 +1,25 @@
+host_name: P2
+host:
+  loopback:
+    local_ip: 171.16.0.2/32
+    iso_net: 49.0000.0000.cccc.0007.00
+  interfaces:
+    - interface: ge-0/0/1
+      description: to PE2
+      local_ip: 10.1.10.5/31
+    - interface: ge-0/0/2
+      description: to RR1
+      local_ip: 10.1.10.18/31
+    - interface: ge-0/0/3
+      description: to P1
+      local_ip: 10.1.10.7/31
+    - interface: ge-0/0/4
+      description: to P1
+      local_ip: 10.1.10.25/31 
+    - interface: ge-0/0/3
+      description: to RR2
+      local_ip: 10.1.10.22/31
+    - interface: ge-0/0/4
+      description: to PE4
+      local_ip: 10.1.10.10/31 
+
