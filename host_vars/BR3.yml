@@ -7,6 +7,10 @@ host:
     - interface: ge-0/0/1
       description: to PE3
       local_ip: 10.2.0.3/24
+      metric: 10
     - interface: ge-0/0/2
       description: to H3
       local_ip: 10.2.34.3/31
+      metric: 10
+  isis:
+    overload: false

@@ -7,13 +7,19 @@ host:
     - interface: ge-0/0/1
       description: to CE1
       local_ip: 10.1.0.1/31
+      metric: 10
     - interface: ge-0/0/2
       description: to CE2
       local_ip: 10.1.0.7/31
+      metric: 10
     - interface: ge-0/0/3
       description: to PE2
       local_ip: 10.1.100.0/31
+      metric: 100
     - interface: ge-0/0/4
       description: to P1
-      local_ip: 10.1.10.2/31 
+      local_ip: 10.1.10.2/31
+      metric: 10
+  isis:
+    overload: false
 

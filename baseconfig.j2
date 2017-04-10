@@ -33,6 +33,8 @@ system {
                     address {{ i.local_ip  }};
                 
                 }
+                family iso {
+                }
                 
             }
         }
@@ -47,5 +49,8 @@ protocols {
         {% for i in host.interfaces %}
         interface {{ i.interface }};
         {% endfor %}
+        {% if host.isis.overload == 'true' %}
+        overload;
+        {% endif %}
     }
 }

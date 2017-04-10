@@ -7,10 +7,15 @@ host:
     - interface: ge-0/0/1
       description: to P1
       local_ip: 10.1.10.21/31
+      metric: 10
     - interface: ge-0/0/2
       description: to RR1
       local_ip: 10.1.10.15/31
+      metric: 10
     - interface: ge-0/0/3
       description: to P2
       local_ip: 10.1.10.23/31
+      metric: 10
+  isis:
+    overload: true
 
