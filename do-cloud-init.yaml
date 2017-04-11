@@ -22,11 +22,13 @@ packages:
   - git
   - tmux
   - virtualbox
+  - vagrant
 runcmd:
   - sudo pip install junos-eznc
   - sudo pip install cryptography==1.2.1
   - sudo ansible-galaxy --force install Juniper.junos
   - git clone https://github.com/crutcha/dotfiles.git /home/ubuntu/dotfiles/
+  - git clone https://github.com/crutcha/junos-vagrant-lab.git /home/ubuntu/junos-vagrant-lab
   - git clone https://github.com/VundleVim/Vundle.vim.git /home/ubuntu/.vim/bundle/Vundle.vim
   - cp /home/ubuntu/dotfiles/.bashrc /home/ubuntu/
   - cp /home/ubuntu/dotfiles/.tmux.conf /home/ubuntu/
