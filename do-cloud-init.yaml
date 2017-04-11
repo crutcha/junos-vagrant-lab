@@ -28,6 +28,6 @@ runcmd:
   - sudo ansible-galaxy --force install Juniper.junos
   - git clone https://github.com/crutcha/dotfiles.git /home/ubuntu/dotfiles/
   - git clone https://github.com/VundleVim/Vundle.vim.git /home/ubuntu/.vim/bundle/Vundle.vim
-  - cp ~/dotfiles/.bashrc /home/ubuntu/
-  - cp ~/dotfiles/.tmux.conf /home/ubuntu/
-  - cp ~/dotfiles/.vimrc /home/ubuntu/
+  - cp /home/ubuntu/dotfiles/.bashrc /home/ubuntu/
+  - cp /home/ubuntu/dotfiles/.tmux.conf /home/ubuntu/
+  - cp /home/ubuntu/dotfiles/.vimrc /home/ubuntu/
