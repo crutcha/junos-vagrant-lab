@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   # General options
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
-    vb.memory = "1024"
+    vb.memory = "512"
   end
 
 =begin
@@ -38,9 +38,6 @@ Vagrant.configure("2") do |config|
     h1.vm.box = "ubuntu/xenial64"
     h1.vm.network "private_network", virtualbox__intnet: "H1-CE",
             ip: "10.1.12.10/24", auto_config: true
-    h1.vm.provider "virtualbox" do |vb|
-      vb.memory = "512"
-    end
   end
 
   config.vm.define "CE1" do |ce1|
@@ -80,6 +77,7 @@ Vagrant.configure("2") do |config|
     pe1.vm.provision "ansible" do |ansible|
       ansible.playbook = "baseconfig.yml"
       ansible.host_key_checking = false
+      ansible.verbose = true
     end
   end
 
