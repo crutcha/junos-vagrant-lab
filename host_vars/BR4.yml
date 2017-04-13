@@ -13,4 +13,5 @@ host:
       local_ip: 10.2.34.4/31
       metric: 10
   isis:
+    enabled: false
     overload: false

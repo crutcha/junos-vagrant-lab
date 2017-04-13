@@ -28,5 +28,6 @@ host:
       description: to RR2
       local_ip: 10.1.10.20/31 
   isis:
+    enabled: true
     overload: false
 
