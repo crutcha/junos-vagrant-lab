@@ -46,9 +46,10 @@ protocols {
     }
     {% if host.isis.enabled == true %}
     isis {
+        level 2 disable;
         interface lo0.0;
         {% for i in host.interfaces %}
-        interface {{ i.interface }} level 2 disable;
+        interface {{ i.interface }};
         {% endfor %}
         {% if host.isis.overload == true %}
         overload;

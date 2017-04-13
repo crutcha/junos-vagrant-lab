@@ -1,11 +1,9 @@
 - name: Build base configuration
-  hosts: all
+  hosts: P_Nodes,PE_Nodes,CE_Nodes
   connection: local
   gather_facts: no
   roles:
     - Juniper.junos
-  vars:
-    ansible_python_interpreter: "/usr/bin/python2.7"
   tasks:
     - name: Build configuration
       template: src=baseconfig.j2 dest=/tmp/{{ inventory_hostname  }}.conf
