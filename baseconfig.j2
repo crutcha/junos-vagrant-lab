@@ -1,59 +1,85 @@
-system {
-    host-name {{ inventory_hostname  }};
-    services {
-        ssh {
-            root-login allow;
-        
-        }
-        netconf {
-            ssh;
-        
-        }
-    
-    }
-
-}
-    interfaces {
-        lo0 {
-            unit 0 {
-                description "peering loopback";
-                family inet {
-                    address {{ host.loopback.local_ip }}
-                }
-                family iso  {
-                    address {{ host.loopback.iso_net }}
-                }
-            }
-        }
-    {% for i in host.interfaces %}
-        {{ i.interface  }} {
-            unit 0 {
-                description "{{ i.description  }}";
-                family inet {
-                    address {{ i.local_ip  }};
-                
-                }
-                family iso {
-                }
-                
-            }
-        }
-    {% endfor %}
-}
-protocols {
-    lldp {
-        interface all;
-    }
-    {% if host.isis.enabled == true %}
-    isis {
-        level 2 disable;
-        interface lo0.0;
+<configuration>
+    <system>
+        <host-name>PE1</host-name>
+        <services>
+            <ssh>
+                <root-login>allow</root-login>
+            </ssh>
+            <netconf>
+                <ssh>
+                </ssh>
+            </netconf>
+            <web-management>
+                <http>
+                    <interface>ge-0/0/0.0</interface>
+                </http>
+            </web-management>
+        </services>
+    </system>
+    <interfaces>
         {% for i in host.interfaces %}
-        interface {{ i.interface }};
+        <interface replace="replace">
+            <name>{{ i.interface }}</name>
+            <unit>
+                <name>0</name>
+                <description>{{ i.description }}</description>
+                <family>
+                    <inet>
+                        <address>
+                            <name>{{ i.local_ip }}</name>
+                        </address>
+                    </inet>
+                    <iso>
+                    </iso>
+                </family>
+            </unit>
+        </interface>
         {% endfor %}
-        {% if host.isis.overload == true %}
-        overload;
+        <interface replace="replace">
+            <name>lo0</name>
+            <unit>
+                <name>0</name>
+                <description>peering loopback</description>
+                <family>
+                    <inet>
+                        <address>
+                            <name>{{ host.loopback.local_ip }}</name>
+                        </address>
+                    </inet>
+                    <iso>
+                        <address>
+                            <name>{{ host.loopback.iso_net }}</name>
+                        </address>
+                    </iso>
+                </family>
+            </unit>
+        </interface>
+    </interfaces>
+    <protocols>
+        {% if host.isis.enabled == true %}
+        <isis replace="replace">
+            {% if host.isis.overload == true %}
+            <overload>
+            </overload>
+            {% endif %}
+            <level>
+                <name>2</name>
+                <disable/>
+            </level>
+            {% for i in host.interfaces %}
+            <interface>
+                <name>ge-0/0/1.0</name>
+            </interface>
+            {% endfor %}
+            <interface>
+                <name>lo0.0</name>
+            </interface>
+        </isis>
         {% endif %}
-    }
-    {% endif %}
-}
+        <lldp>
+            <interface>
+                <name>all</name>
+            </interface>
+        </lldp>
+    </protocols>
+</configuration>

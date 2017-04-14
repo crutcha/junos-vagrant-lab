@@ -165,10 +165,10 @@ Vagrant.configure("2") do |config|
                 "P_Nodes" => ["P1", "P2"],
                 "PE_Nodes" => ["PE1", "PE2", "PE3", "PE4"],
                 "CE_Nodes" => ["CE1", "CE2", "BR3", "BR4"],
-                "all:children" => ["P Nodes", "PE Nodes", "CE Nodes"]
+                "RR_Nodes" => ["RR1", "RR2"],
+                "all:children" => ["P Nodes", "PE Nodes", "CE Nodes", "RR_Nodes"]
     }
     ansible.playbook = "baseconfig.yml"
-    ansible.verbose = true
   end
 
 

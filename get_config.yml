@@ -1,4 +1,4 @@
-- name: Get facts
+- name: Get configs
   hosts: PE_Nodes,P_Nodes,CE_Nodes
   connection: local
   gather_facts: no
@@ -8,10 +8,11 @@
     default_user: "ansible"
     default_password: "Ansible"
   tasks:
-    - name: get facts
+    - name: download config
       junos_get_config:
         user: "root"
         passwd: "Juniper"
+        format: xml
         host: "{{ ansible_ssh_host }}"
         port: "{{ ansible_ssh_port }}"
         dest: "/tmp/{{ inventory_hostname }}.xml"

@@ -1,20 +1,20 @@
 - name: Build base configuration
-  hosts: P_Nodes,PE_Nodes,CE_Nodes
+  hosts: P_Nodes,PE_Nodes,CE_Nodes,RR_Nodes
   connection: local
   gather_facts: no
   roles:
     - Juniper.junos
   tasks:
     - name: Build configuration
-      template: src=baseconfig.j2 dest=/tmp/{{ inventory_hostname  }}.conf
+      template: src=baseconfig.j2 dest=/tmp/{{ inventory_hostname  }}.xml
 
     - name: Install template
       junos_install_config:
-        host={{ ansible_ssh_host  }}
-        port={{ ansible_ssh_port  }}
-        user=root
-        passwd=Juniper
-        comment="configured by ansible"
-        file=/tmp/{{ inventory_hostname  }}.conf
-        logfile=changes.log
-
+        host: "{{ ansible_ssh_host  }}"
+        port: "{{ ansible_ssh_port  }}"
+        user: "root"
+        passwd: "Juniper"
+        comment: "configured by ansible"
+        file: "/tmp/{{ inventory_hostname  }}.xml"
+        logfile: "changes.log"
+        replace: true
