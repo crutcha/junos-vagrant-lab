@@ -1,7 +1,7 @@
 host_name: RR1
 host:
   loopback:
-    local_ip: 171.16.0.201/32
+    local_ip: 172.16.0.201/32
     iso_net: 49.0000.0000.cccc.0005.00
   interfaces:
     - interface: ge-0/0/1
