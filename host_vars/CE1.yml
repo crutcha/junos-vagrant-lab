@@ -19,4 +19,10 @@ host:
   isis:
     enabled: false
     overload: false
- 
+  bgp:
+    as: 65001
+    peers:
+      - ip: 10.1.0.1
+        as: 65000
+      - ip: 10.1.0.5
+        as: 65000

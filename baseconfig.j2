@@ -55,6 +55,11 @@
             </unit>
         </interface>
     </interfaces>
+    <routing-options>
+        <autonomous-system replace="replace">
+            <as-number>{{ host.bgp.as }}</as-number>
+        </autonomous-system>
+    </routing-options>
     <protocols>
         {% if host.isis.enabled == true %}
         <isis replace="replace">
@@ -75,6 +80,23 @@
                 <name>lo0.0</name>
             </interface>
         </isis>
+        {% endif %}
+        {% if 'bgp' in host.items() %}
+        <bgp replace="replace">
+            <group>
+                <name>eBGP</name>
+                <family>
+                    <inet>
+                        <unicast>
+                        </unicast>
+                    </inet>
+                </family>
+                <peer-as>65001</peer-as>
+                <neighbor>
+                    <name>10.1.0.0</name>
+                </neighbor>
+            </group>
+        </bgp>
         {% endif %}
         <lldp>
             <interface>
