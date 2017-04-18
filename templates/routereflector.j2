@@ -1,0 +1,10 @@
+<configuration>
+    <protocols>
+        <bgp>
+            <group>
+                <name>iBGP</name>
+                <cluster>{{ host.loopback.local_ip[:-3] }}</cluster>
+            </group>
+        </bgp>
+    </protocols>
+</configuration>

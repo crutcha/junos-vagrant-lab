@@ -1,6 +1,6 @@
 <configuration>
     <system>
-        <host-name>PE1</host-name>
+        <host-name>{{ host_name }}</host-name>
         <services>
             <ssh>
                 <root-login>allow</root-login>
@@ -75,7 +75,7 @@
             </level>
             {% for i in host.interfaces %}
             <interface>
-                <name>ge-0/0/1.0</name>
+                <name>{{ i.interface }}</name>
             </interface>
             {% endfor %}
             <interface>
@@ -85,6 +85,7 @@
         {% endif %}
         {% if host.bgp.enabled == true %}
         <bgp replace="replace">
+            {% if not host.bgp.peers.external|e %}
             {% for k,v in host.bgp.peers.external.iteritems() %}
             <group>
                 <name>eBGP-{{ k }}</name>
@@ -102,6 +103,7 @@
                 {% endfor %}
             {% endfor %}
             </group>
+            {% endif %}
             <group>
                 <name>iBGP</name>
                 <type>internal</type>

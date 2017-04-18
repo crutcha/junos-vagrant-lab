@@ -5,8 +5,8 @@
   roles:
     - Juniper.junos
   tasks:
-    - name: Build configuration
-      template: src=baseconfig.j2 dest=/tmp/{{ inventory_hostname  }}.xml
+    - name: Build Base Configuration
+      template: src=templates/baseconfig.j2 dest=/tmp/{{ inventory_hostname  }}.xml
 
     - name: Install template
       junos_install_config:
@@ -18,3 +18,24 @@
         file: "/tmp/{{ inventory_hostname  }}.xml"
         logfile: "changes.log"
         replace: true
+
+- name: Configure BGP Route Reflection
+  hosts: RR_Nodes
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+  tasks:
+    - name: Build RR Config
+      template: src=templates/routereflector.j2 dest=/tmp/{{ inventory_hostname }}_RR.xml
+
+    - name: BGP RR Template
+      junos_install_config:
+        host: "{{ ansible_ssh_host  }}"
+        port: "{{ ansible_ssh_port  }}"
+        user: "root"
+        passwd: "Juniper"
+        comment: "configured by ansible"
+        file: "/tmp/{{ inventory_hostname  }}_RR.xml"
+        logfile: "changes.log"
+

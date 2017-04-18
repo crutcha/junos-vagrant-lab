@@ -20,11 +20,11 @@ host:
       description: to P1
       local_ip: 10.1.10.25/31
       metric: 10
-    - interface: ge-0/0/3
+    - interface: ge-0/0/5
       description: to RR2
       local_ip: 10.1.10.22/31
       metric: 10
-    - interface: ge-0/0/4
+    - interface: ge-0/0/6
       description: to PE4
       local_ip: 10.1.10.10/31
       metric: 10

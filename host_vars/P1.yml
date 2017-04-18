@@ -20,13 +20,13 @@ host:
       description: to P2
       local_ip: 10.1.10.24/31
       metric: 10
-    - interface: ge-0/0/3
+    - interface: ge-0/0/5
+      description: to RR2
+      local_ip: 10.1.10.20/31 
+    - interface: ge-0/0/6
       description: to PE3
       local_ip: 10.1.10.8/31
       metric: 10
-    - interface: ge-0/0/4
-      description: to RR2
-      local_ip: 10.1.10.20/31 
   isis:
     enabled: true
     overload: false
