@@ -15,3 +15,11 @@ host:
   isis:
     enabled: false
     overload: false
+  bgp:
+    enabled: true
+    as: 65002
+    peers:
+      external:
+        65000:
+          - ip: 10.2.0.33
+      internal:

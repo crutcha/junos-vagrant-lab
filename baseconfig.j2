@@ -55,11 +55,13 @@
             </unit>
         </interface>
     </interfaces>
+    {% if host.bgp.enabled == true %}
     <routing-options>
         <autonomous-system replace="replace">
             <as-number>{{ host.bgp.as }}</as-number>
         </autonomous-system>
     </routing-options>
+    {% endif %}
     <protocols>
         {% if host.isis.enabled == true %}
         <isis replace="replace">
@@ -81,20 +83,48 @@
             </interface>
         </isis>
         {% endif %}
-        {% if 'bgp' in host.items() %}
+        {% if host.bgp.enabled == true %}
         <bgp replace="replace">
+            {% for k,v in host.bgp.peers.external.iteritems() %}
             <group>
-                <name>eBGP</name>
+                <name>eBGP-{{ k }}</name>
                 <family>
                     <inet>
                         <unicast>
                         </unicast>
                     </inet>
                 </family>
-                <peer-as>65001</peer-as>
+                <peer-as>{{ k }}</peer-as>
+                {% for p in v %}
                 <neighbor>
-                    <name>10.1.0.0</name>
+                    <name>{{ p.ip }}</name>
                 </neighbor>
+                {% endfor %}
+            {% endfor %}
+            </group>
+            <group>
+                <name>iBGP</name>
+                <type>internal</type>
+                <local-address>{{ host.loopback.local_ip[:-3] }}</local-address>
+                <family>
+                    <inet>
+                        <unicast>
+                            <add-path>
+                                <receive/>
+                                <send>
+                                    <path-count>6</path-count>
+                                </send>
+                            </add-path>
+                        </unicast>
+                    </inet>
+                </family>
+                {% if host.bgp.peers.internal %}
+                {% for p in host.bgp.peers.internal %}
+                <neighbor>
+                    <name>{{ p.ip }}</name>
+                </neighbor>
+                {% endfor %}
+                {% endif %}
             </group>
         </bgp>
         {% endif %}

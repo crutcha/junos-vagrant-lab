@@ -19,4 +19,13 @@ host:
   isis:
     enabled: true
     overload: false
-
+  bgp:
+    enabled: true
+    as: 65000
+    peers:
+      external:
+        65002:
+          - ip: 10.2.0.4
+      internal:
+        - ip: 172.16.0.201
+        - ip: 172.16.0.202

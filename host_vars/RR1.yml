@@ -19,4 +19,5 @@ host:
   isis:
     enabled: true
     overload: true
-
+  bgp:
+    enabled: false

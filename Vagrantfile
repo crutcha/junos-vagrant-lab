@@ -63,7 +63,7 @@ Vagrant.configure("2") do |config|
     pe1.vm.host_name = "PE1"
     pe1.vm.network "forwarded_port", guest: 22, host: 2003, id: "ssh"
     pe1.vm.network "private_network", virtualbox__intnet: "CE1-PE1"
-    pe1.vm.network "private_network", virtualbox__intnet: "CE1-PE2"
+    pe1.vm.network "private_network", virtualbox__intnet: "CE2-PE2"
     pe1.vm.network "private_network", virtualbox__intnet: "PE1-PE2"
     pe1.vm.network "private_network", virtualbox__intnet: "PE1-P1"
   end

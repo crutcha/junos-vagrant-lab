@@ -24,9 +24,13 @@ host:
     enabled: true
     overload: false
   bgp:
+    enabled: true
     as: 65000
     peers:
-      - ip: 10.1.0.0
-        as: 65001
-      - ip: 10.1.0.4
-        as: 65001
+      external:
+        65001:
+          - ip: 10.1.0.0
+          - ip: 10.1.0.6
+      internal:
+        - ip: 172.16.0.201
+        - ip: 172.16.0.202
