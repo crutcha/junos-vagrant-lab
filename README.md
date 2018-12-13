@@ -4,6 +4,6 @@ This is a JunOS lab using Vagrant specifically built with the topology from [MPL
 
 # Topology
 
-![alt text] (https://raw.githubusercontent.com/crutcha/junos-vagrant-lab/master/MPLS%20Service%20Provider.png)
+![topo] (MPLS Service Provider.png)
 
  
