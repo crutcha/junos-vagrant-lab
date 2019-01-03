@@ -15,6 +15,8 @@ host:
   isis:
     enabled: false
     overload: false
+  ospf:
+    enabled: fals
   bgp:
     enabled: true
     as: 65002
