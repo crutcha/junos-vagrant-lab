@@ -3,7 +3,7 @@
   connection: local
   gather_facts: no
   roles:
-    - Juniper.junos
+    - juniper.junos
   tasks:
     - name: Build Base Configuration
       template: src=templates/baseconfig.j2 dest=/tmp/{{ inventory_hostname  }}.xml
@@ -24,7 +24,7 @@
   connection: local
   gather_facts: no
   roles:
-    - Juniper.junos
+    - juniper.junos
   tasks:
     - name: Build RR Config
       template: src=templates/routereflector.j2 dest=/tmp/{{ inventory_hostname }}_RR.xml

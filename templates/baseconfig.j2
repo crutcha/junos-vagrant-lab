@@ -83,6 +83,18 @@
             </interface>
         </isis>
         {% endif %}
+        {% if host.ospf.enable == true %}
+        <ospf>
+            <area>
+                <name>0.0.0.0</name>
+                {% for intf in host.ospf.interfaces %}
+                <interface>
+                    <name>{{intf}}.0</name>
+                </interface>
+                {% endfor %}
+            </area>
+        </ospf>
+        {% endif %}
         {% if host.bgp.enabled == true %}
         <bgp replace="replace">
             {% if not host.bgp.peers.external|e %}

@@ -3,7 +3,7 @@
   connection: local
   gather_facts: no
   roles:
-    - Juniper.junos
+    - juniper.junos
   vars:
     default_user: "ansible"
     default_password: "Ansible"
