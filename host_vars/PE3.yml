@@ -22,8 +22,8 @@ host:
   ospf:
     enabled: true
     interfaces:
-      - ge-0/0/0/1
-      - ge-0/0/0/2
+      - ge-0/0/1
+      - ge-0/0/2
   bgp:
     enabled: true
     as: 65000
