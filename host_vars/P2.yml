@@ -29,8 +29,17 @@ host:
       local_ip: 10.1.10.10/31
       metric: 10
   isis:
-    enabled: true
+    enabled: false
     overload: false
+  ospf:
+    enabled: true
+    interfaces:
+      - ge-0/0/0/1
+      - ge-0/0/0/2
+      - ge-0/0/0/3
+      - ge-0/0/0/4
+      - ge-0/0/0/5
+      - ge-0/0/0/6
   bgp:
     enabled: false
 

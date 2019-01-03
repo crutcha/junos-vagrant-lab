@@ -17,8 +17,13 @@ host:
       local_ip: 10.2.0.33/24
       metric: 10
   isis:
-    enabled: true
+    enabled: false
     overload: false
+  ospf:
+    enabled: true
+    interfaces:
+      - ge-0/0/0/1
+      - ge-0/0/0/2
   bgp:
     enabled: true
     as: 65000
